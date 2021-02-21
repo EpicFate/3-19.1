@@ -37,7 +37,7 @@ public class DemoWebShopTest {
             requestData.put("ConfirmPassword", "123321");
             requestData.put("register-button", "Register");
 
-            Response responseHTML = given()
+            Response loggedResponse  = given()
                     .contentType(ContentType.JSON)
                     .body(requestData)
                     .filter(filters().customTemplates())
@@ -50,8 +50,8 @@ public class DemoWebShopTest {
                     .extract()
                     .response();
 
-            String html = responseHTML.htmlPath().getString("**.find{it.@head}");
-            assertThat(html, is("Object movedhere"));
+            String logged = loggedResponse.htmlPath().getString("**.find{it.@head}");
+            assertThat(logged, is("Object movedhere"));
         }
 }
 
